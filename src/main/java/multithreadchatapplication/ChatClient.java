@@ -5,9 +5,16 @@ import java.net.*;
 public class ChatClient {
     public static void main(String[] args){
         try(
+                //create a socket to connect to the server running on localhost at port 1234
         Socket socket = new Socket("localhost",1234);
+
+        //reader to take input from the user via console
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        //ready to receive the message from the server
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+        //writer to send message to the server
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         ){
             System.out.println("connected to the server");
@@ -20,7 +27,7 @@ public class ChatClient {
                         System.out.println(serverMsg);
                     }
                     }catch(IOException e){
-                    e.printStackTrace();
+                    e.printStackTrace();  //print error if reading fails
                 }
             }).start();
 
